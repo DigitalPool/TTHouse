@@ -38,6 +38,9 @@
             transition: visibility 0s 2s, opacity 2s linear;
             text-align: center;
             font-size: 3rem;
+			@media screen and (max-width: 600px) {
+				font-size: 1rem;
+			}
         }
 
         @keyframes fade-out {
@@ -131,7 +134,7 @@
         }
 
         .mainSite h1 {
-            font-size: 4rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(20px);
@@ -143,9 +146,11 @@
             max-width: 600px;
             text-align: center;
             line-height: 1.6;
+			padding: 30px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 1s ease 0.8s;
+			font-size: 12px;
         }
 
         /* When the mainSite element itself has the show-site class, reveal inner text */
