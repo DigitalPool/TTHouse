@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Third House | Curtain Reveal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /* Text animation styles */
+        .main_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        h1 {
+            color: white;
+            transition: visibility 0s 2s, opacity 2s linear;
+            text-align: center;
+            font-size: 3rem;
+        }
+
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .intoit {
+            animation: fade-in 2s forwards;
+        }
+
+        .hidden {
+            animation: fade-out 2s forwards;
+        }
+
+        /* Logo styles - Updated to match curtain logo size */
+        .logo_svg {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px; /* Same as curtain logos */
+            height: 90px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            cursor: pointer;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .logo_svg.visible {
+            opacity: 1;
+        }
+
+        .logo_svg img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: brightness(0) invert(1);
+            background-color: transparent;
+            pointer-events: none;
+        }
+
+        /* Hover fill overlay layer */
+        .logo_svg .hover-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("The Third House Logo Final.svg") center/contain no-repeat;
+            filter: brightness(0) invert(1);
+            clip-path: inset(100% 0 0 0); /* start hidden */
+            transition: clip-path 1.8s ease;
+        }
+
+        .logo_svg:hover .hover-fill {
+            clip-path: inset(0 0 0 0); /* reveal upward */
+        }
+
+        /* Hidden content behind the curtain - FIXED Z-INDEX */
+        .mainSite {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            z-index: 2; /* Higher than curtain */
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            pointer-events: none; /* Allow clicks to pass through when hidden */
+        }
+
+        .mainSite.visible {
+            pointer-events: auto; /* Enable interactions when visible */
+        }
+
+        .mainSite h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.5s;
+        }
+
+        .mainSite p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.8s;
+        }
+
+        /* When the mainSite element itself has the show-site class, reveal inner text */
+        .mainSite.show-site h1,
+        .mainSite.show-site p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Curtain container */
+        .mainCont {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3; /* Higher than mainSite but will be hidden */
+            display: none;
+        }
+
+        .leftDiv, .rightDiv {
+            position: relative;
+            width: 50vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .leftDiv {
+            background-color: black;
+            float: left;
+        }
+
+        .rightDiv {
+            background-color: black;
+            float: right;
+        }
+
+        .leftDiv img {
+            position: absolute;
+            right: 0;
+            transform: translateX(50%);
+            width: 300px; /* Matching size */
+            height: 90px; /* Matching size */
+            object-fit: contain; /* Ensure proper scaling */
+            cursor: pointer;
+            filter: brightness(0) invert(1);
+        }
+
+        .rightDiv img {
+            position: absolute;
+            left: 0;
+            transform: translateX(-50%);
+            width: 300px; /* Matching size */
+            height: 90px; /* Matching size */
+            object-fit: contain; /* Ensure proper scaling */
+            cursor: pointer;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Curtain reveal animation */
+        .reveal-left {
+            transform: translateX(-100%);
+        }
+
+        .reveal-right {
+            transform: translateX(100%);
+        }
+
+        /* Make the mainSite visible when it has the show-site class */
+        .mainSite.show-site {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site behind curtain - FIXED: Added visible class management -->
+    <div class="mainSite" id="mainSite">
+        <h1>Welcome to The Third House</h1>
+        <p>A creative studio where ideas transform into extraordinary experiences. We blend art, technology, and storytelling to craft immersive digital journeys.</p>
+    </div>
+
+    <!-- Text animation container -->
+    <div class="main_container" id="textContainer">
+        <div id="text_div">
+            <h1 id="intro_text">This is not a studio</h1>
+        </div>
+    </div>
+
+    <!-- Curtain container -->
+    <div class="mainCont" id="curtain">
+        <div class="leftDiv" id="leftDiv">
+            <img id="logoLeft" src="The Third House Logo Final.svg" alt="Left Logo">
+        </div>
+        <div class="rightDiv" id="rightDiv">
+            <img id="logoRight" src="The Third House Logo Final.svg" alt="Right Logo">
+        </div>
+    </div>
+
+    <script>
+        const introtext = document.getElementById("intro_text");
+        const textDiv = document.getElementById("text_div");
+        const textContainer = document.getElementById("textContainer");
+        const mainContainer = document.querySelector(".main_container");
+        const leftDiv = document.getElementById("leftDiv");
+        const rightDiv = document.getElementById("rightDiv");
+        const logoLeft = document.getElementById("logoLeft");
+        const logoRight = document.getElementById("logoRight");
+        const mainSite = document.getElementById("mainSite");
+        const curtain = document.getElementById("curtain");
+
+        // Start the text animation sequence
+        setTimeout(() => {
+            introtext.classList.add("intoit");
+
+            setTimeout(() => {
+                introtext.classList.add("hidden");
+            }, 2000);
+
+            setTimeout(() => {
+                introtext.classList.remove("hidden");
+                introtext.classList.add("intoit");
+                introtext.innerText = "This is the third house";
+            }, 4000);
+
+            setTimeout(() => {
+                textDiv.classList.add("hidden");
+
+                setTimeout(() => {
+                    // Inject logo container with outline and fill layers
+                    mainContainer.innerHTML = `
+                        <div class="logo_svg" id="logoSVG">
+                            <img src="The Third House Logo Outline.svg" 
+                                alt="TTH Outline" />
+                            <div class="hover-fill"></div>
+                        </div>
+                    `;
+
+                    const logoSVG = document.getElementById("logoSVG");
+
+                    setTimeout(() => {
+                        logoSVG.classList.add("visible");
+                        logoSVG.classList.add("intoit");
+                    }, 100);
+
+                    // When logo is clicked, show curtain and trigger reveal
+                    logoSVG.onclick = function() {
+                        // Hide the text container
+                        textContainer.style.display = 'none';
+                        
+                        // Show the curtain
+                        curtain.style.display = 'block';
+                        
+                        // Trigger curtain reveal after a brief delay
+                        setTimeout(revealSite, 300);
+                    };
+
+                }, 2000);
+            }, 6800);
+        }, 0);
+
+        function revealSite() {
+            leftDiv.classList.add("reveal-left");
+            rightDiv.classList.add("reveal-right");
+            mainSite.classList.add("show-site");
+            mainSite.classList.add("visible"); // Enable interactions
+            
+            // Don't hide the curtain completely, just let it slide away
+            // The mainSite is now visible behind it with higher z-index
+            setTimeout(() => {
+                // Lower the curtain stacking and disable its pointer events
+                // so the main site becomes visible and interactive.
+                curtain.style.zIndex = '0';
+                curtain.style.pointerEvents = 'none';
+            }, 1600);
+        }
+
+        // Also allow clicking on the curtain logos to reveal the site
+        logoLeft.onclick = revealSite;
+        logoRight.onclick = revealSite;
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Third House Intro</title>
+<style>
+	body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: black;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		overflow: hidden;
+	}
+
+	h1 {
+		color: white;
+		font-family: Helvetica, sans-serif;
+		transition: visibility 0s 2s, opacity 2s linear;
+		text-align: center;
+	}
+
+	@keyframes fade-out {
+		0% { opacity: 1; }
+		100% { opacity: 0; }
+	}
+	@keyframes fade-in {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+
+	.intoit {
+		animation: fade-in 2s forwards;
+	}
+	.hidden {
+		animation: fade-out 2s forwards;
+	}
+
+	.main_container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	.logo_svg {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 310px;
+		height: 90px;
+		opacity: 0;
+		transition: opacity 2s ease;
+		cursor: pointer;
+		overflow: hidden;
+		margin: auto;
+	}
+
+	.logo_svg.visible {
+		opacity: 1;
+	}
+
+	.logo_svg img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		filter: brightness(0) invert(1);
+		background-color: transparent;
+		pointer-events: none;
+	}
+
+	/* Hover fill overlay layer */
+	.logo_svg .hover-fill {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: url("The Third House Logo Final.svg") center/contain no-repeat;
+		filter: brightness(0) invert(1);
+		clip-path: inset(100% 0 0 0); /* start hidden */
+		transition: clip-path 1.8s ease;
+	}
+
+	.logo_svg:hover .hover-fill {
+		clip-path: inset(0 0 0 0); /* reveal upward */
+	}
+</style>
+</head>
+<body>
+	<div class="main_container">
+		<div id="text_div">
+			<h1 id="intro_text">This is not a studio</h1>
+		</div>
+	</div>
+
+	<script>
+		const introtext = document.getElementById("intro_text");
+		const textDiv = document.getElementById("text_div");
+		const mainContainer = document.querySelector(".main_container");
+
+		setTimeout(() => {
+			introtext.classList.add("intoit");
+
+			setTimeout(() => {
+				introtext.classList.add("hidden");
+			}, 2000);
+
+			setTimeout(() => {
+				introtext.classList.remove("hidden");
+				introtext.classList.add("intoit");
+				introtext.innerText = "This is the third house";
+			}, 4000);
+
+			setTimeout(() => {
+				textDiv.classList.add("hidden");
+
+				setTimeout(() => {
+					// Inject logo container with outline and fill layers
+					mainContainer.innerHTML = `
+						<div class="logo_svg">
+							<img src="The Third House Logo Outline.svg" 
+								alt="TTH Outline" />
+							<div class="hover-fill"></div>
+						</div>
+					`;
+
+					const logoSVG = document.querySelector(".logo_svg");
+
+					setTimeout(() => {
+						logoSVG.classList.add("visible");
+						logoSVG.classList.add("intoit");
+					}, 100);
+				}, 2000);
+			}, 8000);
+		}, 0);
+	</script>
+</body>
+</html>
