@@ -83,7 +83,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            filter: brightness(0) invert(1);
+            /* invert but reduce brightness and remove saturation so result is gray, not pure white */
+            filter: brightness(0.7) invert(1) saturate(0);
             background-color: transparent;
             pointer-events: none;
         }
@@ -96,7 +97,8 @@
             width: 100%;
             height: 100%;
             background: url("The Third House Logo Final.svg") center/contain no-repeat;
-            filter: brightness(0) invert(1);
+            /* make the hover-fill gray when shown */
+            filter: brightness(0.7) invert(1) saturate(0);
             clip-path: inset(100% 0 0 0); /* start hidden */
             transition: clip-path 1.8s ease;
         }
@@ -203,7 +205,7 @@
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
-            filter: brightness(0) invert(1);
+            filter: brightness(0.7) invert(1) saturate(0);
         }
 
         .rightDiv img {
@@ -214,7 +216,7 @@
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
-            filter: brightness(0) invert(1);
+            filter: brightness(0.7) invert(1) saturate(0);
         }
 
         /* Curtain reveal animation */
@@ -249,10 +251,10 @@
     <!-- Curtain container -->
     <div class="mainCont" id="curtain">
         <div class="leftDiv" id="leftDiv">
-            <img id="logoLeft" src="The Third House Logo Final.svg" alt="Left Logo">
+            <img id="logoLeft" src="The Third House Logo Gray.svg" alt="Left Logo">
         </div>
         <div class="rightDiv" id="rightDiv">
-            <img id="logoRight" src="The Third House Logo Final.svg" alt="Right Logo">
+            <img id="logoRight" src="The Third House Logo Gray.svg" alt="Right Logo">
         </div>
     </div>
 
