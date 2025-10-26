@@ -5,6 +5,9 @@
     <style>
       .st0 {
         fill: #a09f9f;
+        stroke: #9f9e9f;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
       }
     </style>
   </defs>
