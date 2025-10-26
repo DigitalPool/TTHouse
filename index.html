@@ -164,9 +164,19 @@
             display: none;
         }
 
-        .leftDiv, .rightDiv {
+        .rightDiv {
             position: relative;
-            width: 50vw;
+            width: 51vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.5s ease-in-out;
+        }
+        .leftDiv {
+            position: relative;
+            width: 49vw;
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -176,19 +186,19 @@
         }
 
         .leftDiv {
-            background-color: black;
+            background-color: red;
             float: left;
         }
 
         .rightDiv {
-            background-color: black;
+            background-color: rgb(66, 2, 215);
             float: right;
         }
 
         .leftDiv img {
             position: absolute;
             right: 0;
-            transform: translateX(50%);
+            transform: translateX(56%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
@@ -199,7 +209,7 @@
         .rightDiv img {
             position: absolute;
             left: 0;
-            transform: translateX(-50%);
+            transform: translateX(-42%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
