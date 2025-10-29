@@ -210,12 +210,18 @@
         .leftDiv img {
             position: absolute;
             right: 0;
-            transform: translateX(56%);
+            transform: translateX(57%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
             filter: brightness(0.7) invert(1) saturate(0);
+            @media screen and (min-width: 1024px) {
+                transform: translateX(57%);
+            }
+            @media screen and (min-width: 768px) {
+                transform: translateX(55.7%);
+            }
 			@media screen and (max-width: 600px) {
 				transform: translateX(50%);
 			}
@@ -224,12 +230,18 @@
         .rightDiv img {
             position: absolute;
             left: 0;
-            transform: translateX(-44%);
+            transform: translateX(-43%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
             filter: brightness(0.7) invert(1) saturate(0);
+            @media screen and (min-width: 1024px) {
+                transform: translateX(-43%);
+            }
+            @media screen and (min-width: 768px) {
+                transform: translateX(-44.3%);
+            }
 			@media screen and (max-width: 600px) {
 				transform: translateX(-50%);
 			}
