@@ -134,11 +134,14 @@
         }
 
         .mainSite h1 {
-            font-size: 2rem;
+            font-size: 4rem;
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 1s ease 0.5s;
+			@media screen and (max-width: 600px) {
+				font-size: 2rem;
+			}
         }
 
         .mainSite p {
@@ -146,11 +149,13 @@
             max-width: 600px;
             text-align: center;
             line-height: 1.6;
-			padding: 30px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 1s ease 0.8s;
-			font-size: 12px;
+			@media screen and (max-width: 600px) {
+				font-size: 0.8rem;
+				padding: 12px;
+			}
         }
 
         /* When the mainSite element itself has the show-site class, reveal inner text */
@@ -205,23 +210,29 @@
         .leftDiv img {
             position: absolute;
             right: 0;
-            transform: translateX(58%);
+            transform: translateX(56%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
             filter: brightness(0.7) invert(1) saturate(0);
+			@media screen and (max-width: 600px) {
+				transform: translateX(50%);
+			}
         }
 
         .rightDiv img {
             position: absolute;
             left: 0;
-            transform: translateX(-42%);
+            transform: translateX(-44%);
             width: 300px; /* Matching size */
             height: 90px; /* Matching size */
             object-fit: contain; /* Ensure proper scaling */
             cursor: pointer;
             filter: brightness(0.7) invert(1) saturate(0);
+			@media screen and (max-width: 600px) {
+				transform: translateX(-50%);
+			}
         }
 
         /* Curtain reveal animation */
