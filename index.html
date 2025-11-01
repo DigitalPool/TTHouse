@@ -109,7 +109,8 @@
         .logo-split-container .leftDiv img {
             position: absolute;
             right: 0;
-            transform: translateX(57%);
+            top: 50%;
+            transform: translateX(57%) translateY(-50%);
             width: 300px;
             height: 90px;
             object-fit: contain;
@@ -120,7 +121,8 @@
         .logo-split-container .rightDiv img {
             position: absolute;
             left: 0;
-            transform: translateX(-43%);
+            top: 50%;
+            transform: translateX(-43%) translateY(-50%);
             width: 300px;
             height: 90px;
             object-fit: contain;
@@ -132,7 +134,8 @@
         .logo-split-container .leftDiv .hover-fill {
             position: absolute;
             right: 0;
-            transform: translateX(57%);
+            top: 50%;
+            transform: translateX(57%) translateY(-50%);
             width: 300px;
             height: 90px;
             background: url("The Third House Logo Final.svg") center/contain no-repeat;
@@ -145,7 +148,8 @@
         .logo-split-container .rightDiv .hover-fill {
             position: absolute;
             left: 0;
-            transform: translateX(-43%);
+            top: 50%;
+            transform: translateX(-43%) translateY(-50%);
             width: 300px;
             height: 90px;
             background: url("The Third House Logo Final.svg") center/contain no-repeat;
@@ -287,13 +291,13 @@
                     // Create and inject the split logo container
                     const splitLogoHTML = `
                         <div class="logo-split-container" id="logoSplitContainer">
-                            <div class="leftDiv" id="logoLeftDiv" style="position: relative; display: flex; justify-content: center; align-items: center;">
+                            <div class="leftDiv" id="logoLeftDiv">
                                 <img src="The Third House Logo Outline.svg" alt="Left Logo">
-                                <div class="hover-fill" style="position: absolute; z-index: 100;"></div>
+                                <div class="hover-fill"></div>
                             </div>
-                            <div class="rightDiv" id="logoRightDiv" style="position: relative; display: flex; justify-content: center; align-items: center;">
+                            <div class="rightDiv" id="logoRightDiv">
                                 <img src="The Third House Logo Outline.svg" alt="Right Logo">
-                                <div class="hover-fill" style="position: absolute; z-index: 100;"></div>
+                                <div class="hover-fill"></div>
                             </div>
                         </div>
                     `;
