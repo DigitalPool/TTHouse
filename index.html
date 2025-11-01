@@ -287,13 +287,13 @@
                     // Create and inject the split logo container
                     const splitLogoHTML = `
                         <div class="logo-split-container" id="logoSplitContainer">
-                            <div class="leftDiv" id="logoLeftDiv">
+                            <div class="leftDiv" id="logoLeftDiv" style="position: relative; display: flex; justify-content: center; align-items: center;">
                                 <img src="The Third House Logo Outline.svg" alt="Left Logo">
-                                <div class="hover-fill"></div>
+                                <div class="hover-fill" style="position: absolute; z-index: 100;"></div>
                             </div>
-                            <div class="rightDiv" id="logoRightDiv">
+                            <div class="rightDiv" id="logoRightDiv" style="position: relative; display: flex; justify-content: center; align-items: center;">
                                 <img src="The Third House Logo Outline.svg" alt="Right Logo">
-                                <div class="hover-fill"></div>
+                                <div class="hover-fill" style="position: absolute; z-index: 100;"></div>
                             </div>
                         </div>
                     `;
