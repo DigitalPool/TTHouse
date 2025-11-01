@@ -161,6 +161,24 @@
 
         /* Hover behavior now handled via JavaScript for precise control */
 
+        /* Mobile adjustments - keep split effect but with smaller logo */
+        @media (max-width: 600px) {
+            .logo-split-container .leftDiv img,
+            .logo-split-container .leftDiv .hover-fill {
+                width: 220px;
+                height: auto;
+            }
+
+            .logo-split-container .rightDiv img,
+            .logo-split-container .rightDiv .hover-fill {
+                width: 220px;
+                height: auto;
+            }
+        }
+
+
+
+
         /* Reveal animation - slide both halves away */
         .logo-split-container .leftDiv.reveal-left {
             transform: translateX(-100%);

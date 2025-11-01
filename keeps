@@ -92,7 +92,7 @@
 
         .logo-split-container.visible .leftDiv,
         .logo-split-container.visible .rightDiv {
-            opacity: 1;
+            animation: fade-in 2s forwards; /* Smooth fade-in like the text */
         }
 
         .logo-split-container .leftDiv {
@@ -109,30 +109,33 @@
         .logo-split-container .leftDiv img {
             position: absolute;
             right: 0;
-            transform: translateX(57%);
+            top: 50%;
+            transform: translateX(57%) translateY(-50%);
             width: 300px;
             height: 90px;
             object-fit: contain;
             filter: brightness(0.7) invert(1) saturate(0);
-            pointer-events: none;
+            pointer-events: auto; /* Enable pointer events for hover detection */
         }
 
         .logo-split-container .rightDiv img {
             position: absolute;
             left: 0;
-            transform: translateX(-43%);
+            top: 50%;
+            transform: translateX(-43%) translateY(-50%);
             width: 300px;
             height: 90px;
             object-fit: contain;
             filter: brightness(0.7) invert(1) saturate(0);
-            pointer-events: none;
+            pointer-events: auto; /* Enable pointer events for hover detection */
         }
 
         /* Fill overlay for each half - positioned to match outline logos */
         .logo-split-container .leftDiv .hover-fill {
             position: absolute;
             right: 0;
-            transform: translateX(57%);
+            top: 50%;
+            transform: translateX(57%) translateY(-50%);
             width: 300px;
             height: 90px;
             background: url("The Third House Logo Final.svg") center/contain no-repeat;
@@ -145,7 +148,8 @@
         .logo-split-container .rightDiv .hover-fill {
             position: absolute;
             left: 0;
-            transform: translateX(-43%);
+            top: 50%;
+            transform: translateX(-43%) translateY(-50%);
             width: 300px;
             height: 90px;
             background: url("The Third House Logo Final.svg") center/contain no-repeat;
@@ -155,10 +159,7 @@
             pointer-events: none;
         }
 
-        /* When either half is hovered, fill both */
-        .logo-split-container:hover .hover-fill {
-            clip-path: inset(0 0 0 0); /* reveal upward */
-        }
+        /* Hover behavior now handled via JavaScript for precise control */
 
         /* Reveal animation - slide both halves away */
         .logo-split-container .leftDiv.reveal-left {
@@ -330,6 +331,34 @@
 
                     logoLeftDiv.onclick = handleLogoClick;
                     logoRightDiv.onclick = handleLogoClick;
+
+                    // Hover handlers - when hovering over either logo, reveal both fills
+                    const leftLogoImg = logoLeftDiv.querySelector('img');
+                    const rightLogoImg = logoRightDiv.querySelector('img');
+                    const leftFill = logoLeftDiv.querySelector('.hover-fill');
+                    const rightFill = logoRightDiv.querySelector('.hover-fill');
+
+                    const showFills = () => {
+                        leftFill.style.clipPath = 'inset(0 0 0 0)';
+                        rightFill.style.clipPath = 'inset(0 0 0 0)';
+                    };
+
+                    const hideFills = () => {
+                        leftFill.style.clipPath = 'inset(100% 0 0 0)';
+                        rightFill.style.clipPath = 'inset(100% 0 0 0)';
+                    };
+
+                    // Add hover listeners to both logo images
+                    leftLogoImg.addEventListener('mouseenter', showFills);
+                    leftLogoImg.addEventListener('mouseleave', hideFills);
+                    rightLogoImg.addEventListener('mouseenter', showFills);
+                    rightLogoImg.addEventListener('mouseleave', hideFills);
+
+                    // Also maintain fill when hovering over the fill itself
+                    leftFill.addEventListener('mouseenter', showFills);
+                    leftFill.addEventListener('mouseleave', hideFills);
+                    rightFill.addEventListener('mouseenter', showFills);
+                    rightFill.addEventListener('mouseleave', hideFills);
 
                 }, 2000);
             }, 6800);
